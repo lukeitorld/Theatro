@@ -17,6 +17,7 @@ Motor de Juegos 3D Minimalista inspirado en Bitsy y Pilas Engine.
 
 ## Ejemplo Mínimo
 ```js
+import { Actor, Escena, Tramoyista, Director, Protagonista } from "./dist/theatro.esm.js";
 //Los items son las imágenes de las herramientas que se cargan a la barra inferior
 const items = [
     { nombre: "azada", ruta: "./assets/imagenes/azada.png" },
