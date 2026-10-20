@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theatro</title>
+  <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+  <script type="importmap">
+  {
+  "imports": {
+    "three":
+    "./node_modules/three/build/three.module.js"
+    }
+  }
+</script>
+  <div id="pantalla">   
+    <div id="superior_derecho"></div>
+    <div id="superior_izquierdo"></div>
+    <!-- área de juego -->
+    <div id="app"></div>
+    <img id="herramienta-en-mano">
+
+    <div id="dialogo"></div>
+  </div>
+  <script type="module" src="main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,221 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    background: #87ceeb;
+}
+
+/* Contenedor muestra los dialogos de texto */
+#dialogo {
+    display: none;
+
+    position: fixed;
+
+    bottom: 90px;
+
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 500px;
+
+    padding: 16px;
+
+    background: rgba(0, 0, 0, 0.8);
+
+    color: white;
+
+    border: 2px solid white;
+
+    z-index: 200;
+}
+
+/* Panel superior izquierdo */
+#superior_izquierdo {
+    position: fixed;
+    top: 16px;
+    left: 16px;
+
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+
+    color: white;
+    z-index: 10;
+}
+
+/* Panel superior derecho */
+#superior_derecho {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+
+    color: white;
+    text-align: right;
+    z-index: 10;
+}
+
+#superior_izquierdo,
+#superior_derecho {
+    position: fixed;
+    top: 16px;
+    min-width: 180px;
+
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+
+    color: white;
+    z-index: 10;
+}
+
+#superior_izquierdo {
+    left: 16px;
+}
+
+#superior_derecho {
+    right: 16px;
+    text-align: right;
+}
+
+/* Área de Three.js */
+#app {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    /* Detrás de la barra */
+}
+
+/* Mirilla en el centro absoluto */
+#mirilla {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    pointer-events: none;
+    /* ✅ No tapa clics del juego */
+    z-index: 100;
+    /* ✅ Por encima de todo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Líneas de la cruz */
+#mirilla::before,
+#mirilla::after {
+    content: '';
+    background: rgba(255, 255, 255, 0.9);
+    position: absolute;
+}
+
+#mirilla::before {
+    width: 2px;
+    height: 12px;
+    /* Línea vertical */
+}
+
+#mirilla::after {
+    width: 12px;
+    height: 2px;
+    /* Línea horizontal */
+}
+
+
+
+/* Barra del inventario */
+#barra-inventario {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 4px;
+    /* Espacio entre ranuras */
+    padding: 8px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    z-index: 10;
+    /* Por ENCIMA del canvas ✅ */
+}
+
+/* Cada ranura */
+.ranura {
+    width: 48px;
+    height: 48px;
+    background: rgba(139, 90, 43, 0.6);
+    border: 3px solid #5a3818;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+/* Resaltar al pasar o seleccionar */
+.ranura:hover,
+.ranura.seleccionada {
+    background: rgba(255, 210, 80, 0.7);
+    border-color: #ffd54f;
+    transform: translateY(-2px);
+}
+
+/* Ícono del elemento */
+.icono {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    image-rendering: pixelated;
+    /* ✅ Para que se vea nítido estilo píxel */
+}
+
+/* Número de cantidad */
+.cantidad {
+    position: absolute;
+    bottom: 2px;
+    right: 3px;
+    font-family: monospace;
+    font-weight: bold;
+    font-size: 11px;
+    color: white;
+    text-shadow: 1px 1px 0 black, -1px -1px 0 black;
+    pointer-events: none;
+}
+
+#herramienta-en-mano {
+    position: fixed;
+    bottom: 40px;       /* 🔹 Más arriba para que no quede tapado por la barra */
+    right: 40px;        /* 🔹 Más cerca de la esquina inferior derecha */
+    width: 128px;        /* 🔹 Doble de tamaño base */
+    image-rendering: pixelated;
+    z-index: 50;
+    pointer-events: none;
+
+    transform-origin: center bottom;
+    transform: scale(3) rotate(-25deg); /* 🔹 Mucho más grande y más inclinada */
+}
+
+#herramienta-en-mano.usando {
+    animation: usarHerramienta 0.18s ease-in-out;
+}
+
+@keyframes usarHerramienta {
+    0%   { transform: scale(3) rotate(-25deg); }
+    30%  { transform: scale(4) rotate(5deg); }   /* Golpe hacia adelante */
+    60%  { transform: scale(3.5) rotate(-15deg); }  /* Rebote */
+    100% { transform: scale(3) rotate(-25deg); }   /* Vuelve a posición reposo */
+}
